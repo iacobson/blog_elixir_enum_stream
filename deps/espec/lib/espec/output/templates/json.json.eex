@@ -1,0 +1,24 @@
+<% last_example = List.last(examples) %>
+{
+"examples":
+[
+<%= for example <- examples do %>
+<% {description, file_line, status, info, duration} = example %>
+{"description":"<%= description %>","file_line":"<%= file_line %>","status":"<%= status %>","info":"<%= info %>","duration":<%= duration %>}
+<%= unless example == last_example, do: "," %>
+<% end %>
+],
+<% {example_count, failure_count, pending_count, duration, load_time, spec_time, seed} = summary %>
+"summary":
+{
+"example_count":<%= example_count %>,
+"failure_count":<%= failure_count %>,
+"pending_count":<%= pending_count %>,
+"duration":<%= duration %>,
+"load_time":<%= load_time %>,
+"spec_time":<%= spec_time %>
+<%= if seed do %>
+,"Randomized with seed":<%= seed %>
+<% end %>
+}
+}
